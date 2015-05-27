@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<!--
+/*
+ * R.js, ultra-light solution to dependencies management.
+ * https://github.com/RobertoPrevato/R.js
+ *
+ * Copyright 2015, Roberto Prevato
+ * http://ugrose.com
+ *
+ * Licensed under the MIT license:
+ * http://www.opensource.org/licenses/MIT
+ */
+-->
+<html lang="en">
+<head>
+	<!-- Force latest IE rendering engine or ChromeFrame if installed -->
+	<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><![endif]-->
+	<meta charset="utf-8">
+	<title>R.js</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="description" content="ultra-light solution to dependencies management" />
+	<meta name="copyright" content="Copyright 2015 Roberto Prevato roberto.prevato@gmail.com" />
+	<!-- Bootstrap styles -->
+  <link rel="stylesheet" href="styles/bootstrap.css">
+	<!-- Generic page styles -->
+  <link rel="stylesheet" href="styles/styles.css">
+	<link rel="icon" href="favicon.ico" type="image/x-icon" />
+</head>
+<body>
+  <header>
+    <h1 class="title">R.js</h1>
+  </header>
+  <div id="main">
+		<hr />
+		<ul class="nav nav-tabs">
+			<li role="presentation" class="active"><a href="index.html">Home</a>
+			<li role="presentation"><a href="examples.html">Examples</a></li>
+		</ul>
+		<h4>Features:</h4>
+		<ol>
+			<li>Supports asynchronous module definition</li>
+			<li>Keeps synchronous what can stay synchronous</li>
+			<li>Evaluates the function that defines an object, only when all dependencies are ready</li>
+			<li>Includes grunt task to implement <strong>super minification</strong> (minification of objects keys)</li>
+		</ol>
+	</div>
+	<hr />
+	<footer>
+		<ul>
+			<li><a href="https://github.com/RobertoPrevato/R.js">Source code</a></li>
+			<li>Demo built using <a href="http://getbootstrap.com/">Bootstrap</a> and Icons from <a href="http://glyphicons.com/">Glyphicons</a>.</li>
+		</ul>
+	</footer>
+	<script src="scripts/libs/r.js"></script>
+  <script>
+	+function () {
+		
+		//defines HelloWorld; its dependencies are: "Hello" and "World"
+		R("HelloWorld", ["Hello", "World"], function (Hello, World) {
+			var a = Hello + " " + World;
+			console.log("%c@ " + a, "color:darkred;");
+			return a;
+		});
+		
+		//defines Hello
+		R("Hello", [], function () {
+			return "Hello";
+		});
+		
+		//defines World
+		R("World", [], function () {
+			return "World";
+		});
+		
+		//supports asynchronous definitions: evaluates
+		R("SomeModule", ["LateModule"], function (LateModule) {
+			//this function gets resolved when the "LateModule" becomes available (see below interval)
+			//for example, this may happen when loading dynamically JavaScript with an AJAX call
+			console.log("LateModule was resolved!");
+			return "";
+		});
+		
+		var k = 0;
+		
+		var interval = window.setInterval(function () {
+			k++;
+			if (k == 5) {
+				window.clearInterval(interval);
+				
+				//defines "LateModule" after 5 seconds...
+				R("LateModule", [], function () {
+					
+					return "foo";
+					
+				});
+			} else {
+				console.log("...", k);
+			}
+		}, 1e3);
+		
+	}();
+	</script>
+</body>
+</html>

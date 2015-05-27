@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<!--
+/*
+ * R.js, ultra-light solution to dependencies management.
+ * https://github.com/RobertoPrevato/R.js
+ *
+ * Copyright 2015, Roberto Prevato
+ * http://ugrose.com
+ *
+ * Licensed under the MIT license:
+ * http://www.opensource.org/licenses/MIT
+ */
+-->
+<html lang="en">
+<head>
+	<!-- Force latest IE rendering engine or ChromeFrame if installed -->
+	<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><![endif]-->
+	<meta charset="utf-8">
+	<title>R.js</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="description" content="ultra-light solution to dependencies management" />
+	<meta name="copyright" content="Copyright 2015 Roberto Prevato roberto.prevato@gmail.com" />
+	<!-- Bootstrap styles -->
+  <link rel="stylesheet" href="styles/bootstrap.css">
+  <!-- Highlight.js styles -->
+  <link rel="stylesheet" href="styles/monokai.css">
+	<!-- Generic page styles -->
+  <link rel="stylesheet" href="styles/styles.css">
+	<link rel="icon" href="favicon.ico" type="image/x-icon" />
+</head>
+<body>
+  <header>
+    <h1 class="title">R.js - Examples</h1>
+  </header>
+  <div id="main">
+		<hr />
+		<ul class="nav nav-tabs">
+			<li role="presentation"><a href="index.html">Home</a>
+			<li role="presentation" class="active"><a href="examples.html">Examples</a></li>
+		</ul>
+		
+		<div id="examples">
+    <ol class="links">
+      <li><a href="#hello-world">Hello World.</a></li>
+			<li><a href="#asynchronous-def">Asynchronous definition.</a></li>
+			<li><a href="#just-functions">Just functions.</a></li>
+    </ol>
+		
+    <h3 id="hello-world">Hello World.</h3>
+    <pre><code class="js">
+
+    //defines HelloWorld; its dependencies are: "Hello" and "World"; gets resolved when both "Hello" and "World" becomes defined.
+    R("HelloWorld", ["Hello", "World"], function (Hello, World) {
+      return Hello + " " + World;
+    });
+		
+    //defines Hello
+    R("Hello", [], function () {
+      return "Hello";
+    });
+		
+    //defines World
+    R("World", [], function () {
+      return "World";
+    });
+
+    </code></pre>
+		
+    <h3 id="asynchronous-def">Asynchronous definition.</h3>
+    <pre><code class="js">
+
+    //defines "SomeModule", its dependency is "LateModule"; gets resolved when "LateModule" becomes defined
+    R("SomeModule", ["LateModule"], function (LateModule) {
+      //this function is called when the "LateModule" becomes available
+      //for example, this may happen when loading dynamically JavaScript with an AJAX call
+      console.log("LateModule was resolved!");
+      return "";
+    });
+
+    window.setTimeout(function () {
+      //defines "LateModule" after 5 seconds
+      R("LateModule", [], function () {  
+        return "foo";
+      });
+    }, 5e3);
+
+    </code></pre>
+		
+    <h3 id="just-functions">Just functions.</h3>
+    <pre><code class="js">
+
+    +function () {
+      var k;
+      
+      //"Q" doesn't return anything, but depends upon "Something", therefore its function is called after "Something" function.
+      R("Q", ["Something"], function () {
+        //gets fired after "Something" function
+        console.log("@", k);
+      });
+
+      //defines "Something": its function does not return anything; but interacts with external variable "k"
+      R("Something", [], function () {
+        k = 30;
+      });
+    }();
+
+    </code></pre>
+	</div>
+	</div>
+  <hr />
+	<footer>
+		<h4>Notes:</h4>
+		<ol>
+			<li><a href="https://github.com/RobertoPrevato/R.js">Source code</a></li>
+			<li>Demo built using <a href="http://getbootstrap.com/">Bootstrap</a> and Icons from <a href="http://glyphicons.com/">Glyphicons</a>.</li>
+      <li>External libraries in this page are loaded using <a href="http://en.wikipedia.org/wiki/Content_delivery_network">CDN</a>; if the connection is not stable this demo could stop working.</li>
+		</ol>
+	</footer>
+<script src="scripts/libs/r.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+<script>
+	hljs.initHighlightingOnLoad();
+</script>
+</body>
+</html>

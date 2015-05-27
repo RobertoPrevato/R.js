@@ -1,0 +1,19 @@
+body {
+	padding: 30px;
+}
+pre {
+  padding: 0px;
+  margin: 0px
+  border: none;
+  background-color: none;
+}
+code {
+  font-size: 16px;
+}
+
+#examples h3 {
+	margin-top: 30px;
+}
+#canvas {
+	
+}
