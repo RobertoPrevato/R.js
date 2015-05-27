@@ -1,5 +1,5 @@
 # R.js
-Ultra-light solution to dependencies management, freely inspired by RequireJs and Angular dependency injection mechanism; desiring to be simpler, lighter and framework-independent.
+Ultralight solution to dependencies management, freely inspired by RequireJs and Angular dependency injection mechanism; desiring to be simpler, lighter and framework-independent.
 
 ## Features:
 - Provides a way to organize the code in modules, to avoid polluting the global namespace
