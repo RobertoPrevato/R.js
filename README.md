@@ -1,17 +1,19 @@
 # R.js
 Ultra-light solution to dependencies management, freely inspired by RequireJs and Angular dependency injection mechanism; desiring to be simpler and lighter.
 
-**Features**:
+## Features:
 - Provides a way to organize the code in modules, to avoid polluting the global namespace
 - Supports asynchronous module definition
 - Keeps synchronous what can stay synchronous
 - Includes Grunt task to implement super minification (minification of objects keys)
 
-**Notes**:
-Despite being inspired by RequireJs, R.js does not follow the AMD API specification: the function used to _define_ is the same function used to call the dependencies (RequireJs *define* would be *R*; RequireJs *require* is always *R*).
+## Notes:
+Despite being inspired by RequireJs, R.js does not follow the AMD API specification: in R.js the same function _R_ is used both to _define_ and to _require_ the dependencies.
+
 - R.js follows a different philosophy and behaves similarly to Angular dependency mechanism: modules can be defined in random order, but the keys are chosen during development and JavaScript are normally loaded using <script> tags. While in Angular different functions are used to define modules (_controller_, _directive_, _factory_, _module_, _etc..._), in R.js the function _R_ is always used to define modules.
 
-**Examples**:
+## Examples:
+- Hello World.
 ```javascript
 //defines HelloWorld; its dependencies are: "Hello" and "World"; gets resolved when both "Hello" and "World" becomes defined.
 R("HelloWorld", ["Hello", "World"], function (Hello, World) {
@@ -27,4 +29,38 @@ R("Hello", [], function () {
 R("World", [], function () {
   return "World";
 });
+```
+- Asynchronous definition.
+```javascript
+//defines "SomeModule", its dependency is "LateModule"; gets resolved when "LateModule" becomes defined
+R("SomeModule", ["LateModule"], function (LateModule) {
+  //this function is called when the "LateModule" becomes available
+  //for example, this may happen when loading dynamically JavaScript with an AJAX call
+  console.log("LateModule was resolved!");
+  return "";
+});
+
+window.setTimeout(function () {
+  //defines "LateModule" after 5 seconds
+  R("LateModule", [], function () {  
+    return "foo";
+  });
+}, 5e3);
+```
+- Functions to be called satisfying dependencies
+```javascript
++function () {
+  var k;
+  
+  //"Q" doesn't return anything, but depends upon "Something", therefore its function is called after "Something" function.
+  R("Q", ["Something"], function () {
+    //gets fired after "Something" function
+    console.log("@", k);
+  });
+
+  //defines "Something": its function does not return anything; but interacts with external variable "k"
+  R("Something", [], function () {
+    k = 30;
+  });
+}();
 ```
