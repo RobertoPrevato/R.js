@@ -5,7 +5,17 @@ Ultra-light solution to dependencies management, freely inspired by RequireJs an
 - Provides a way to organize the code in modules, to avoid polluting the global namespace
 - Supports asynchronous module definition
 - Keeps synchronous what can stay synchronous
-- Includes Grunt task to implement super minification (minification of objects keys)
+- Includes Grunt task to implement *super minification* (minification of objects keys)
+
+## Usage:
+R(_key_, _dependencies_, _function_);
+> to define an object with its dependencies
+
+R(_key_);
+> to require an object
+
+R([_key1_, _key2_, _key3_, ...])
+> to require an array of objects
 
 ## Notes:
 Despite being inspired by RequireJs, R.js does not follow the AMD API specification: in R.js the same function _R_ is used both to _define_ and to _require_ the dependencies.
