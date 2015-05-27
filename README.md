@@ -10,7 +10,7 @@ Ultra-light solution to dependencies management, freely inspired by RequireJs an
 ## Notes:
 Despite being inspired by RequireJs, R.js does not follow the AMD API specification: in R.js the same function _R_ is used both to _define_ and to _require_ the dependencies.
 
-- R.js follows a different philosophy and behaves similarly to Angular dependency mechanism: modules can be defined in random order, but the keys are chosen during development and JavaScript are normally loaded using <script> tags. While in Angular different functions are used to define modules (_controller_, _directive_, _factory_, _module_, _etc..._), in R.js the function _R_ is always used to define modules.
+- R.js follows a different philosophy and behaves similarly to Angular dependency mechanism: modules can be defined in random order, but the keys are chosen during development and JavaScript are normally loaded using script elements. While in Angular different functions are used to define modules (_controller_, _directive_, _factory_, _module_, _etc..._), in R.js the function _R_ is always used to define modules.
 
 ## Examples:
 - Hello World.
