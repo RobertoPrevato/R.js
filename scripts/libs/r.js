@@ -44,16 +44,16 @@
   }
 
   R = function (key, deps, fn) {
-    var al = arguments[len];
-    if (al === 0) return R;
-    if (al === 1) {
+    var a = arguments, al = a[len];
+    if (!al) return R;
+    if (al == 1) {
       //get
-      var keys = arguments[0];
+      var keys = a[0];
       if (typeof keys === "string") {
-        if (al === 1) return bag[keys];
+        if (al == 1) return bag[keys];
         var a = [];
         for (var i = 0, l = al; i < l; i++) {
-          a[psh](arguments[i]);
+          a[psh](a[i]);
         }
         return R(a);
       }
@@ -64,7 +64,7 @@
       return d;
     }
 
-    if (al === 2)
+    if (al == 2)
       //set
       return bag[key] = deps;
 
