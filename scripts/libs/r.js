@@ -22,18 +22,18 @@
   }
 
   function onDefined(key) {
-    var x, resolved = [];
+    var x, resolved = [], res = "resolved";
     for (x in queue) {
       //x is a key
       var def = queue[x];
-      if (def.resolved) continue;
+      if (def[res]) continue;
       var waitingfor = def[0], ix = indexOf(waitingfor, key);
       if (ix != -1)
         //remove key from waiting for
         waitingfor.splice(ix, 1);
 
       if (!waitingfor[len]) {
-        queue[x].resolved = true;
+        queue[x][res] = true;
         resolved[psh](x);
         R(x, def[1], def[2]);
       }
@@ -44,19 +44,12 @@
   }
 
   R = function (key, deps, fn) {
-    var a = arguments, al = a[len];
+    var a = arguments, al = a[len], und = undefined;
     if (!al) return R;
     if (al == 1) {
       //get
       var keys = a[0];
-      if (typeof keys === "string") {
-        if (al == 1) return bag[keys];
-        var a = [];
-        for (var i = 0, l = al; i < l; i++) {
-          a[psh](a[i]);
-        }
-        return R(a);
-      }
+      if (typeof keys == "string") return bag[keys];
       //multiple get
       var d = [];
       for (var i = 0, l = keys[len]; i < l; i++)
@@ -73,7 +66,7 @@
     var d = R(deps), waitingfor = [];
     if (!d) return null;
     for (var i = 0, l = d[len]; i < l; i++)
-      if (d[i] === undefined)
+      if (d[i] === und)
         waitingfor[psh](deps[i]);
 
     if (waitingfor[len]) {
@@ -104,7 +97,7 @@
         result = fn.apply(w, d);
         break;
     }
-    if (result === undefined) result = "";
+    if (result === und) result = "";
     bag[key] = result;
     //notify definition
     onDefined(key, result);
