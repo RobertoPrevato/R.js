@@ -1,6 +1,9 @@
 body {
 	padding: 30px;
 }
+h1 {
+	font-family: "Lucida Console", Monaco, monospace;
+}
 pre {
   padding: 0px;
   margin: 0px
