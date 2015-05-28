@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <!--
 /*
  * R.js, ultra-light solution to dependencies management.
@@ -21,84 +21,55 @@
 	<meta name="description" content="ultra-light solution to dependencies management" />
 	<meta name="copyright" content="Copyright 2015 Roberto Prevato roberto.prevato@gmail.com" />
 	<!-- Bootstrap styles -->
-  <link rel="stylesheet" href="styles/bootstrap.css">
+	<link rel="stylesheet" href="styles/bootstrap.css">
 	<!-- Generic page styles -->
-  <link rel="stylesheet" href="styles/styles.css">
+	<link rel="stylesheet" href="styles/styles.css">
 	<link rel="icon" href="favicon.ico" type="image/x-icon" />
 </head>
 <body>
-  <header>
-    <h1 class="title">R.js</h1>
-  </header>
-  <div id="main">
+	<header>
+		<h1 class="title">R.js</h1>
+	</header>
+	<div id="main">
 		<hr />
 		<ul class="nav nav-tabs">
 			<li role="presentation" class="active"><a href="index.html">Home</a>
 			<li role="presentation"><a href="examples.html">Examples</a></li>
 		</ul>
-		<h4>Features:</h4>
-		<ol>
-			<li>Supports asynchronous module definition</li>
-			<li>Keeps synchronous what can stay synchronous</li>
-			<li>Evaluates the function that defines an object, only when all dependencies are ready</li>
-			<li>Includes grunt task to implement <strong>super minification</strong> (minification of objects keys)</li>
-		</ol>
+	</div>
+	<hr />
+	<div id="content">
+		<div class="preloader-mask" data-bind="css: $data.main ? 'main-preloader' : ''">
+			<div class="preloader-icon"></div>
+		</div>
 	</div>
 	<hr />
 	<footer>
 		<ul>
 			<li><a href="https://github.com/RobertoPrevato/R.js">Source code</a></li>
 			<li>Demo built using <a href="http://getbootstrap.com/">Bootstrap</a> and Icons from <a href="http://glyphicons.com/">Glyphicons</a>.</li>
+			<li>External libraries in this page are loaded using <a href="http://en.wikipedia.org/wiki/Content_delivery_network">CDN</a>; if the connection is not stable this demo could stop working.</li>
 		</ul>
 	</footer>
+	<!-- libraries -->
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/js/bootstrap.min.js"></script>
+	<!-- knockout -->
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/knockout/3.2.0/knockout-min.js"></script>
+	<script src="scripts/demo/ko-template-engine.js"></script>
+
 	<script src="scripts/libs/r.js"></script>
-  <script>
-	+function () {
-		
-		//defines HelloWorld; its dependencies are: "Hello" and "World"
-		R("HelloWorld", ["Hello", "World"], function (Hello, World) {
-			var a = Hello + " " + World;
-			console.log("%c@ " + a, "color:darkred;");
-			return a;
-		});
-		
-		//defines Hello
-		R("Hello", [], function () {
-			return "Hello";
-		});
-		
-		//defines World
-		R("World", [], function () {
-			return "World";
-		});
-		
-		//supports asynchronous definitions: evaluates
-		R("SomeModule", ["LateModule"], function (LateModule) {
-			//this function gets resolved when the "LateModule" becomes available (see below interval)
-			//for example, this may happen when loading dynamically JavaScript with an AJAX call
-			console.log("LateModule was resolved!");
-			return "";
-		});
-		
-		var k = 0;
-		
-		var interval = window.setInterval(function () {
-			k++;
-			if (k == 5) {
-				window.clearInterval(interval);
-				
-				//defines "LateModule" after 5 seconds...
-				R("LateModule", [], function () {
-					
-					return "foo";
-					
-				});
-			} else {
-				console.log("...", k);
-			}
-		}, 1e3);
-		
-	}();
-	</script>
+
+	<!-- NB: all entities are loaded in the WRONG order! (model requires extend and events; dashboard requires model) -->
+	<script src="scripts/demo/app.js"></script>
+	<script src="scripts/demo/dashboard/models/dashboard.js"></script>
+	<script src="scripts/demo/dashboard/templates.js"></script>
+	<script src="scripts/demo/common/models/model.js"></script>
+	<script src="scripts/demo/common/components/string.js"></script>
+	<script src="scripts/demo/common/components/extend.js"></script>
+	<script src="scripts/demo/common/components/events.js"></script>
+	<script src="scripts/demo/common/components/code.js"></script>
+	<script src="scripts/demo/common/components/progress.js"></script>
 </body>
 </html>

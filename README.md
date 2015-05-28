@@ -1,11 +1,11 @@
 # R.js
-Ultralight solution to dependencies management, freely inspired by RequireJs and Angular dependency injection mechanism; desiring to be simpler, lighter and framework-independent.
+Ultralight solution to dependencies management, freely inspired by RequireJs and Angular dependency injection mechanism; desiring to be simpler and framework-independent.
 
 ## Features:
-- Provides a way to organize the code in modules, to avoid polluting the global namespace
+- Provides a way to organize the code in modules
+- Makes scalability easy, providing an easy way to execute functions when their dependencies are loaded
 - Supports asynchronous module definition
 - Keeps synchronous what can stay synchronous
-- Includes Grunt task to implement *super minification* (minification of objects keys)
 
 ## Usage:
 _R(key, dependencies, function);_
@@ -57,7 +57,7 @@ window.setTimeout(function () {
   });
 }, 5e3);
 ```
-- Functions to be called satisfying dependencies
+- Functions to be called after some dependencies are ready
 ```javascript
 +function () {
   var k;
@@ -75,3 +75,10 @@ window.setTimeout(function () {
 }();
 ```
 
+## Why another implementation for dependency management?
+I used RequireJs for a long time, and came to the conclusion that it makes things too complicated,.
+This is a subjective matter and I don't want to discuss my opinion in depth, but I came to conclusions that are really similar to Tom Dale's [http://tomdale.net/2012/01/amd-is-not-the-answer](http://tomdale.net/2012/01/amd-is-not-the-answer).
+AngularJs dependency injection is pleasant to use, but I prefer to keep my code framework-independent, as much as possible. If I write code in plain JavaScript and it can be used in any kind of application, I *don't want to* bind it to a specific framework.
+The third option: i.e. defining a single global variable to extend with different objects, works perfectly, but organizing code in modules in AMD-like fashion gives advantages, like:
+- the possibility to load scripts without caring about the exact order
+- the possibility to further obfuscate and minify the code, by minifying the module _keys_ representing functions and objects
