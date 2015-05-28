@@ -79,8 +79,8 @@ window.setTimeout(function () {
 
 ## Why another implementation for dependency management?
 I used RequireJs for a long time, and came to the conclusion that it makes things too complicated.
-This is just my personal opinion and I don't want to discuss it in depth, but I came to conclusions that are really similar to Tom Dale's [http://tomdale.net/2012/01/amd-is-not-the-answer](http://tomdale.net/2012/01/amd-is-not-the-answer).
+This is just my personal opinion and I don't want to discuss it in depth. After all: why _not to_ write something alternative?
 AngularJs dependency injection is pleasant to use, but I prefer to keep my code framework-independent, as much as possible. If I write code in plain JavaScript and it can be used in any kind of application, I *don't want to* bind it to a specific framework.
-The third option: i.e. defining a single global variable to extend with different objects, works perfectly, but organizing code in modules in AMD-like fashion gives advantages, like:
+The third option: i.e. defining a single global variable and extend it with different objects, works perfectly, but organizing code in modules in AMD-like fashion gives advantages, like:
 - the possibility to load scripts without caring about the exact order
 - the possibility to further obfuscate and minify the code, by minifying the module _keys_ representing functions and objects
