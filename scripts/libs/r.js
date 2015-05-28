@@ -10,18 +10,18 @@
  */
 (function () {
 
-  var bag = {}, queue = {};
+  var bag = {}, queue = {}, len = "length", psh = "push";
 
   function indexOf(arr, val) {
     var p = "indexOf";
     if (arr[p]) return arr[p](val);
-    for (var i = 0, l = arr.length; i < l; i++) {
+    for (var i = 0, l = arr[len]; i < l; i++) {
       if (arr[i] === val) return i;
     }
     return -1;
   }
 
-  function onDefined(key, val) {
+  function onDefined(key) {
     var x, resolved = [];
     for (x in queue) {
       //x is a key
@@ -32,19 +32,19 @@
         //remove key from waiting for
         waitingfor.splice(ix, 1);
 
-      if (!waitingfor.length) {
+      if (!waitingfor[len]) {
         queue[x].resolved = true;
-        resolved.push(x);
+        resolved[psh](x);
         R(x, def[1], def[2]);
       }
     }
     //clean queue
-    for (var i = 0, l = resolved.length; i < l; i++)
+    for (var i = 0, l = resolved[len]; i < l; i++)
       delete queue[resolved[i]];
   }
 
   R = function (key, deps, fn) {
-    var len = "length", al = arguments[len];
+    var al = arguments[len];
     if (al === 0) return R;
     if (al === 1) {
       //get
@@ -53,14 +53,14 @@
         if (al === 1) return bag[keys];
         var a = [];
         for (var i = 0, l = al; i < l; i++) {
-          a.push(arguments[i]);
+          a[psh](arguments[i]);
         }
         return R(a);
       }
       //multiple get
       var d = [];
       for (var i = 0, l = keys[len]; i < l; i++)
-        d.push(bag[keys[i]]);
+        d[psh](bag[keys[i]]);
       return d;
     }
 
@@ -74,7 +74,7 @@
     if (!d) return null;
     for (var i = 0, l = d[len]; i < l; i++)
       if (d[i] === undefined)
-        waitingfor.push(deps[i]);
+        waitingfor[psh](deps[i]);
 
     if (waitingfor[len]) {
       queue[key] = [waitingfor, deps, fn];
