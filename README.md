@@ -5,7 +5,7 @@ Ultralight solution to dependencies management, freely inspired by RequireJs and
 
 ## Features:
 - Provides a way to organize the code in modules
-- Makes scalability easy because it doesn't throw exception if a dependency is not available for a module: it waits, until eventually it will come
+- Makes scalability easy, because it doesn't throw exception if a dependency is not available for a module: it waits, until eventually it will come
 - Supports asynchronous module definition
 - Keeps synchronous what can stay synchronous
 
