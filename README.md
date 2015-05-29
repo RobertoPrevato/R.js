@@ -5,9 +5,10 @@ Ultralight solution to dependencies management, freely inspired by RequireJs and
 
 ## Features:
 - Provides a way to organize the code in modules
-- Makes scalability easy, because it doesn't throw exception if a dependency is not available for a module: it waits, until eventually it will come
+- Makes scalability easy
 - Supports asynchronous module definition
 - Keeps synchronous what can stay synchronous
+- Allows further minification and obfuscation of code, combined to the *robscure* grunt task
 
 ## Usage:
 _R(key, dependencies, function);_
@@ -23,6 +24,10 @@ _R([key1, key2, key3, ...])_
 Despite being inspired by RequireJs, R.js does not follow the AMD API specification: in R.js the same function _R_ is used both to _define_ and to _require_ the dependencies.
 
 R.js follows a different philosophy and behaves similarly to Angular dependency mechanism: modules can be defined in random order, but the keys are chosen during development and JavaScript are normally loaded using script elements. While in Angular different functions are used to define modules (_controller_, _directive_, _factory_, _module_, _etc..._), in R.js the function _R_ is always used to define modules.
+
+## Why is it easier to use?
+1. it doesn't throw exception if a module is defined and its dependencies are not available: instead it waits until the dependencies will eventually become available
+2. it doesn't inject script tags in your head: R.js just cares about the business logic and executing functions, that's it!
 
 ## Examples:
 - Hello World.
@@ -76,6 +81,21 @@ window.setTimeout(function () {
   });
 }();
 ```
+
+## Use the ♥
+Normally after minification the keys of the modules would stay in clear, so:
+```js
+R("model", [], function () { ... });
+R("dashboard"), ["model"], function () { ... });
+```
+
+Using **robscure** task is possible to further obfuscate the code organized using **R.js**, obtaining something like:
+```js
+R("♥", [], function () { ... });
+R("♪"), ["♥"], function () { ... });
+```
+robscure task
+[https://www.npmjs.com/package/robscure](https://www.npmjs.com/package/robscure)
 
 ## Why another implementation for dependency management?
 I used RequireJs for a long time, and came to the conclusion that it makes things too complicated.
