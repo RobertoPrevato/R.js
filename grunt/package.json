@@ -1,11 +1,32 @@
 {
   "name": "Rjs",
+  "description": "Obfuscates modules defined using R.js",
   "version": "1.0.0",
+  "homepage": "https://github.com/RobertoPrevato/R.js",
+  "author": {
+    "name": "Roberto Prevato",
+    "email": "roberto.prevato@gmail.com",
+    "url": "http://www.ugrose.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RobertoPrevato/R.js"
+  },
+  "bugs": {
+    "url": "https://github.com/RobertoPrevato/R.js/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://raw.githubusercontent.com/RobertoPrevato/R.js/master/LICENSE"
+    }
+  ],
   "private": false,
   "devDependencies": {
     "grunt": "0.4.5",
     "grunt-contrib-less": "0.12.0",
     "grunt-contrib-concat": "0.5.0",
-    "grunt-contrib-uglify": "0.6.0"
+    "grunt-contrib-uglify": "0.6.0",
+    "robscure": "1.0.10"
   }
 }
