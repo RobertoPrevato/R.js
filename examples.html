@@ -13,40 +13,41 @@
 -->
 <html lang="en">
 <head>
-	<!-- Force latest IE rendering engine or ChromeFrame if installed -->
-	<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><![endif]-->
-	<meta charset="utf-8">
-	<title>R.js</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<meta name="description" content="ultra-light solution to dependencies management" />
-	<meta name="copyright" content="Copyright 2015 Roberto Prevato roberto.prevato@gmail.com" />
-	<!-- Bootstrap styles -->
+  <!-- Force latest IE rendering engine or ChromeFrame if installed -->
+  <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><![endif]-->
+  <meta charset="utf-8">
+  <title>R.js</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="description" content="ultra-light solution to dependencies management" />
+  <meta name="copyright" content="Copyright 2015 Roberto Prevato roberto.prevato@gmail.com" />
+  <!-- Bootstrap styles -->
   <link rel="stylesheet" href="styles/bootstrap.css">
   <!-- Highlight.js styles -->
   <link rel="stylesheet" href="styles/monokai.css">
-	<!-- Generic page styles -->
+  <!-- Generic page styles -->
   <link rel="stylesheet" href="styles/styles.css">
-	<link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
 </head>
 <body>
   <header>
     <h1 class="title">R.js</h1>
-		<h3>ultralight solution to dependencies management, freely inspired by RequireJs and Angular dependency injection mechanism.</h3>
+    <h3>ultralight solution to dependencies management, freely inspired by RequireJs and Angular dependency injection mechanism.</h3>
   </header>
   <div id="main">
-		<hr />
-		<ul class="nav nav-tabs">
-			<li role="presentation"><a href="index.html">Home</a>
-			<li role="presentation" class="active"><a href="examples.html">Examples</a></li>
-		</ul>
-		
-		<div id="examples">
+    <hr />
+    <ul class="nav nav-tabs">
+      <li role="presentation"><a href="index.html">Home</a>
+      <li role="presentation" class="active"><a href="examples.html">Examples</a></li>
+    </ul>
+
+    <div id="examples">
     <ol class="links">
       <li><a href="#hello-world">Hello World.</a></li>
-			<li><a href="#asynchronous-def">Asynchronous definition.</a></li>
-			<li><a href="#just-functions">Just functions.</a></li>
+      <li><a href="#asynchronous-def">Asynchronous definition.</a></li>
+      <li><a href="#just-functions">Just functions.</a></li>
+      <li><a href="#/robscure">Keys obfuscation with robscure.</a></li>
     </ol>
-		
+
     <h3 id="hello-world">Hello World.</h3>
     <pre><code class="js">
 
@@ -54,19 +55,19 @@
     R("HelloWorld", ["Hello", "World"], function (Hello, World) {
       return Hello + " " + World;
     });
-		
+
     //defines Hello
     R("Hello", [], function () {
       return "Hello";
     });
-		
+
     //defines World
     R("World", [], function () {
       return "World";
     });
 
     </code></pre>
-		
+
     <h3 id="asynchronous-def">Asynchronous definition.</h3>
     <pre><code class="js">
 
@@ -86,15 +87,15 @@
     }, 5e3);
 
     </code></pre>
-		
+
     <h3 id="just-functions">Just functions.</h3>
     <pre><code class="js">
 
     +function () {
       var k;
       
-      //"Q" doesn't return anything, but depends upon "Something", therefore its function is called after "Something" function.
-      R("Q", ["Something"], function () {
+      //"Qualcosa" doesn't return anything, but depends upon "Something", therefore its function is called after "Something" function.
+      R("Qualcosa", ["Something"], function () {
         //gets fired after "Something" function
         console.log("@", k);
       });
@@ -106,22 +107,53 @@
     }();
 
     </code></pre>
-	</div>
-	</div>
+    
+    <h3 id="robscure">Keys obfuscation with robscure.</h3>
+    <p>If you desire, you can obfuscate the keys defined using R.js, to make your code even smaller and more secret.</p>
+    <p>Follow the instructions described here <a href="https://www.npmjs.com/package/robscure">robscure</a>.</p>
+    <pre><code class="js">
+
+      //in your GruntFile, define a configuration element for robscure, defining the areas files (it is recommended to use minified files)
+
+      grunt.initConfig({
+        robscure: {
+          website: {
+            // these are all the built or minified files of all areas: the task will look for each
+            // for each file, a new file will be generated, with obfuscated module names
+            areas: [
+              "../scripts/main.min.js",
+              "../scripts/area-one.min.js",
+              "../scripts/area-two.min.js",
+              "../scripts/area-three.min.js"
+            ]
+          }
+        }
+      });
+
+      //************************************************************************************************
+      //after obfuscation of keys, the keys get converted from:
+      R("model",["extend","events"],function(a,b){var c=function(a,b){b&&_.extend...
+
+      //to... (something like)
+      R("♠",["♫","♦"],function(a,b){var c=function(a,b){b&&_.extend...
+
+    </code></pre>
+  </div>
+  </div>
   <hr />
-	<footer>
-		<ol>
-			<li><a href="https://github.com/RobertoPrevato/R.js">Source code</a></li>
-			<li>Demo built using <a href="https://highlightjs.org/">highlight.js</a>; <a href="http://getbootstrap.com/">Bootstrap</a> and Icons from <a href="http://glyphicons.com/">Glyphicons</a>.</li>
+  <footer>
+    <ol>
+      <li><a href="https://github.com/RobertoPrevato/R.js">Source code</a></li>
+      <li>Demo built using <a href="https://highlightjs.org/">highlight.js</a>; <a href="http://getbootstrap.com/">Bootstrap</a> and Icons from <a href="http://glyphicons.com/">Glyphicons</a>.</li>
       <li>External libraries in this page are loaded using <a href="http://en.wikipedia.org/wiki/Content_delivery_network">CDN</a>; if the connection is not stable this demo could stop working.</li>
-		</ol>
-		<hr />
-		<h6><a href="mailto:roberto.prevato@gmail.com">Roberto Prevato</a></h6>
-	</footer>
+    </ol>
+    <hr />
+    <h6><a href="mailto:roberto.prevato@gmail.com">Roberto Prevato</a></h6>
+  </footer>
 <script src="scripts/libs/r.js"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
 <script>
-	hljs.initHighlightingOnLoad();
+  hljs.initHighlightingOnLoad();
 </script>
 </body>
 </html>
