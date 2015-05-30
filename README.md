@@ -87,13 +87,13 @@ window.setTimeout(function () {
 Normally after minification the keys of the modules would stay in clear, so:
 ```js
 R("model", [], function () { ... });
-R("dashboard"), ["model"], function () { ... });
+R("dashboard", ["model"], function () { ... });
 ```
 
 Using **robscure** task is possible to further obfuscate the code organized using **R.js**, obtaining something like:
 ```js
 R("♥", [], function () { ... });
-R("♪"), ["♥"], function () { ... });
+R("♪", ["♥"], function () { ... });
 ```
 robscure task
 [https://www.npmjs.com/package/robscure](https://www.npmjs.com/package/robscure)
