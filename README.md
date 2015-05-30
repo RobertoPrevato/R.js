@@ -26,8 +26,25 @@ Despite being inspired by RequireJs, R.js does not follow the AMD API specificat
 R.js follows a different philosophy and behaves similarly to Angular dependency mechanism: modules can be defined in random order, but the keys are chosen during development and JavaScript are normally loaded using script elements. While in Angular different functions are used to define modules (_controller_, _directive_, _factory_, _module_, _etc..._), in R.js the function _R_ is always used to define modules.
 
 ## Why is it easier to use?
-1. it doesn't throw exception if a module is defined and its dependencies are not available: instead it waits until the dependencies will eventually become available
-2. it doesn't inject script tags in your head: R.js just cares about the business logic and executing functions, that's it!
+1. R.js doesn't throw exception if a module is defined and its dependencies are not available: instead it waits until the dependencies will eventually become available
+2. R.js doesn't inject script tags in your head: it cares just about the business logic and executing functions, that's it!
+3. You can define as many modules as you desire in a single file: thanks to point 2., there is no connection between scripts location (src) and what they contain; this behavior differs from RequireJs and is similar to Angular mechanism, which allows to define multiple things in the same file:
+```javascript
+//example:
+angular.module("some-module", [])
+  .controller("ControllerOne", ["$scope", "$element", "$attrs", 
+    function ($scope, $element, $attrs) { ... })
+
+  .controller("ControllerTwo", ["$scope", "$element", "$attrs", 
+    function ($scope, $element, $attrs) { ... })
+
+  .directive("DirectiveOne", function () {
+    return {
+      controller: "ControllerOne",
+      scope: true
+    };
+  });//etc.
+```
 
 ## Examples:
 - Hello World.
