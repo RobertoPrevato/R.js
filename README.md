@@ -5,7 +5,7 @@ Ultralight solution to dependencies management, freely inspired by RequireJs and
 
 ## Features:
 - Provides a way to organize the code in modules
-- Makes scalability easy
+- Makes lazy loading and scalability easy
 - Supports asynchronous module definition
 - Keeps synchronous what can stay synchronous
 - Allows further minification and obfuscation of code, combined to the *robscure* grunt task
