@@ -43,7 +43,7 @@
       delete queue[resolved[i]];
   }
 
-  R = function (key, deps, fn) {
+  this.R = function (key, deps, fn) {
     var a = arguments, al = a[len], und = undefined;
     if (!al) return R;
     if (al == 1) {
@@ -73,7 +73,7 @@
       queue[key] = [waitingfor, deps, fn];
       return null;
     }
-    var call = "call", w = window, result;
+    var call = "call", w = this, result;
     switch (d[len]) {
       case 0:
         result = fn[call](w);
@@ -103,4 +103,5 @@
     onDefined(key, result);
     return result;
   };
+  R.queue = function () { return queue; };
 })();

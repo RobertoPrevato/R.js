@@ -5,7 +5,7 @@ Ultralight solution to dependencies management, freely inspired by RequireJs and
 
 ## Features:
 - Provides a way to organize the code in modules
-- Makes lazy loading and scalability easy
+- Makes lazy loading and scalability easy, thanks to its trustful behavior _(see details below)_
 - Supports asynchronous module definition
 - Keeps synchronous what can stay synchronous
 - Allows further minification and obfuscation of code, combined to the *robscure* grunt task
@@ -97,6 +97,13 @@ R("♪", ["♥"], function () { ... });
 ```
 robscure task
 [https://www.npmjs.com/package/robscure](https://www.npmjs.com/package/robscure)
+
+## How to debug
+Since R.js is trustful and doesn't throw exception if a dependency is not resolved; it may happen that your code never gets executed because a key was misspelt. To understand which modules are not resolved and are waiting, you may call the method "queue", which returns the queue of modules waiting for definitions.
+```js
+//call the queue function to see which modules are waiting for definitions of other modules
+R.queue();
+```
 
 ## Why another implementation for dependency management?
 I used RequireJs for a long time, and came to the conclusion that it makes things too complicated.
