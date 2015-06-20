@@ -57,10 +57,13 @@
       return d;
     }
 
-    if (al == 2)
+    if (al == 2) {
       //set
-      return bag[key] = deps;
-
+      bag[key] = deps;
+      //notify definition
+      onDefined(key, deps);
+      return deps;
+    }
     //define
     //key is a key; deps is an array of dependencies keys; fn is the callback function that returns the object
     var d = R(deps), waitingfor = [];
