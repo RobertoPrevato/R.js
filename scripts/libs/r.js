@@ -70,7 +70,7 @@
     if (!d) return null;
     for (var i = 0, l = d[len]; i < l; i++)
       if (d[i] === und)
-        waitingfor[psh](deps[i]);
+        waitingfor[psh](deps[i]), R.debug ? console.log("R.js: waiting for", deps[i]) : 0;
 
     if (waitingfor[len]) {
       queue[key] = [waitingfor, deps, fn];
