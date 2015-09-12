@@ -106,9 +106,9 @@ R.queue();
 ```
 Another option is to set a "debug" property inside the R object to a truthy value. This way, R.js logs into console those dependencies that cannot be resolved immediately.
 ```js
-	//NB: after r.js has been loaded (e.g. after the script element loading r.js)
-	//activate R.debug, so it logs the dependencies that cannot be resolved immediately
-	R.debug = true;
+//NB: after r.js has been loaded (e.g. after the script element loading r.js)
+//activate R.debug, so it logs the dependencies that cannot be resolved immediately
+R.debug = true;
 ```
 
 ## Why another implementation for dependency management?
