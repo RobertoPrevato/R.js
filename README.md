@@ -104,6 +104,12 @@ Since R.js is trustful and doesn't throw exception if a dependency is not resolv
 //call the queue function to see which modules are waiting for definitions of other modules
 R.queue();
 ```
+Another option is to set a "debug" property inside the R object to a truthy value. This way, R.js logs into console those dependencies that cannot be resolved immediately.
+```js
+	//NB: after r.js has been loaded (e.g. after the script element loading r.js)
+	//activate R.debug, so it logs the dependencies that cannot be resolved immediately
+	R.debug = true;
+```
 
 ## Why another implementation for dependency management?
 I used RequireJs for a long time, and came to the conclusion that it makes things too complicated.
