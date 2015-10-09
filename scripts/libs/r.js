@@ -8,8 +8,20 @@
  * Licensed under the MIT license:
  * http://www.opensource.org/licenses/MIT
  */
-(function () {
-
+(function(global, factory) {
+  if (typeof module === "object" && typeof module.exports === "object") {
+    module.exports = global.document ?
+      factory(global, true) :
+      function(w) {
+        if (!w.document) {
+          throw new Error("R.js requires a window with a document");
+        }
+        return factory(w);
+      };
+  } else {
+    factory(global);
+  }
+}(typeof window !== "undefined" ? window : this, function( window, noGlobal ) {
   var bag = {}, queue = {}, len = "length", psh = "push";
 
   function indexOf(arr, val) {
@@ -107,4 +119,5 @@
     return result;
   };
   R.queue = function () { return queue; };
-})();
+  return R;
+}));

@@ -1,0 +1,1 @@
+R("x",["♠"],function(a){return function(){}});
