@@ -6,6 +6,7 @@ Ultralight solution to dependencies management, freely inspired by RequireJs and
 ## Features:
 - Provides a way to organize the code in modules
 - Makes lazy loading and scalability easy, thanks to its trustful behavior _(see details below)_
+- Allows to define modules that work seamlessly within [NodeJs](https://nodejs.org/) and inside the browsers
 - Supports asynchronous module definition
 - Keeps synchronous what can stay synchronous
 - Allows further minification and obfuscation of code, combined to the *robscure* grunt task
@@ -109,6 +110,62 @@ Another option is to set a "debug" property inside the R object to a truthy valu
 //NB: after r.js has been loaded (e.g. after the script element loading r.js)
 //activate R.debug, so it logs the dependencies that cannot be resolved immediately
 R.debug = true;
+```
+
+## Use with NodeJs and Electron
+R.js allows to define modules that can be used in both [NodeJs](https://nodejs.org/) and a regular browser; if served to a client.
+Imagine, for example, to have defined some functions for string processing (format; repeat; trim; etc.).
+```js
+R("string", [], function () {
+  return {
+    format: function (s) {
+      var args = Array.prototype.slice.call(arguments, 1);
+      return s.replace(/{(\d+)}/g, function (match, i) {
+        return typeof args[i] != 'undefined' ? args[i] : match;
+      });
+    },
+    removeHiphens: function (s) {
+      return s.replace(/-(.)/g, function (a, b) { return b.toUpperCase(); });
+    },
+    repeat: function (string, num) {
+      return new Array(parseInt(num) + 1).join(string);
+    },
+    trim: function (s) {
+      return s.replace(/^[\s]+|[\s]+$/g, '');
+    }
+  };
+});
+```
+
+Then it may be reused in NodeJs; by making the R library globally available:
+```js
+//require R.js; make it globally available (this is necessary)
+global.R = require("./custom_modules/r.js");
+require("./custom_modules/components/string.js");
+```
+
+Similarly, in [Electron](http://electron.atom.io/):
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hello World!</title>
+  </head>
+  <body>
+    <h1>Hello World!</h1>
+    We are using io.js <script>document.write(process.version)</script>
+    and Electron <script>document.write(process.versions["electron"])</script>.
+    <button id="super">Super!</button>
+    <script>
+    (function () {
+      window.R = require("./scripts/shared/libs/r.js");
+      R.debug = true;
+    })();
+    </script>
+    <!-- NB: loads modules defined using R.js / -->
+    <script src="scripts/shared/components/string.js"></script>
+  </body>
+</html>
 ```
 
 ## Why another implementation for dependency management?

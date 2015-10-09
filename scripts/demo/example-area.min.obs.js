@@ -1,1 +1,1 @@
-R("x",["♠"],function(a){return function(){}});
+R("∑",["♠"],function(a){return function(){}});

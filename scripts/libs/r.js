@@ -10,18 +10,11 @@
  */
 (function(global, factory) {
   if (typeof module === "object" && typeof module.exports === "object") {
-    module.exports = global.document ?
-      factory(global, true) :
-      function(w) {
-        if (!w.document) {
-          throw new Error("R.js requires a window with a document");
-        }
-        return factory(w);
-      };
+    module.exports = factory();
   } else {
-    factory(global);
+    factory();
   }
-}(typeof window !== "undefined" ? window : this, function( window, noGlobal ) {
+}(typeof window !== "undefined" ? window : this, function() {
   var bag = {}, queue = {}, len = "length", psh = "push";
 
   function indexOf(arr, val) {
