@@ -25,7 +25,7 @@
     }
     return -1;
   }
-
+  
   function onDefined(key) {
     var x, resolved = [], res = "resolved";
     for (x in queue) {
@@ -47,7 +47,14 @@
     for (var i = 0, l = resolved[len]; i < l; i++)
       delete queue[resolved[i]];
   }
-
+  
+  function logwait(name) {
+    var c = console;
+    c.log("R.js: waiting for", name);
+    var trace = "trace";
+    if (c[trace]) c[trace]();
+  }
+  
   this.R = function (key, deps, fn) {
     var a = arguments, al = a[len], und = undefined;
     if (!al) return R;
@@ -75,7 +82,7 @@
     if (!d) return null;
     for (var i = 0, l = d[len]; i < l; i++)
       if (d[i] === und)
-        waitingfor[psh](deps[i]), R.debug ? console.log("R.js: waiting for", deps[i]) : 0;
+        waitingfor[psh](deps[i]), R.debug ? logwait(deps[i]) : 0;
 
     if (waitingfor[len]) {
       queue[key] = [waitingfor, deps, fn];
