@@ -3,18 +3,9 @@ Ultralight solution for dependency injection, simple and framework independent.
 
 [Live demo](https://robertoprevato.github.io/demos/rjs/index.html)
 
-Minified (1.6 KB).
-
-## How to use
-Either install using `npm`:
-
 ```bash
 npm install r-dependency-injection
 ```
-
-Or download one of these two files:
-* [https://github.com/RobertoPrevato/R.js/blob/master/scripts/libs/r.js](https://github.com/RobertoPrevato/R.js/blob/master/scripts/libs/r.js)
-* [https://github.com/RobertoPrevato/R.js/blob/master/scripts/libs/r.min.js](https://github.com/RobertoPrevato/R.js/blob/master/scripts/libs/r.min.js)
 
 ## Features:
 - Provides a way to organize the code in modules

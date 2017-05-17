@@ -1,8 +1,8 @@
 {
-  "name": "Rjs",
-  "description": "Obfuscates modules defined using R.js",
+  "name": "devr",
+  "description": "dev tasks for R.js",
   "version": "1.0.0",
-  "homepage": "https://github.com/RobertoPrevato/R.js",
+  "private": true,
   "author": {
     "name": "Roberto Prevato",
     "email": "roberto.prevato@gmail.com",

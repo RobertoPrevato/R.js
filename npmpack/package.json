@@ -1,0 +1,35 @@
+{
+  "name": "r-dependency-injection",
+  "description": "Ultralight solution for dependency injection.",
+  "version": "1.0.3",
+  "homepage": "https://github.com/RobertoPrevato/R.js",
+  "main": "./r.js",
+  "files": [
+    "r.js",
+    "r-entry.js"
+  ],
+  "author": {
+    "name": "Roberto Prevato",
+    "email": "roberto.prevato@gmail.com",
+    "url": "https://robertoprevato.github.io"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RobertoPrevato/R.js"
+  },
+  "bugs": {
+    "url": "https://github.com/RobertoPrevato/R.js/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/RobertoPrevato/R.js/blob/master/LICENSE"
+    }
+  ],
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "keywords": [
+    "R.js dependency-injection di modules"
+  ]
+}
