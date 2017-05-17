@@ -1,7 +1,7 @@
 {
-  "name": "r-dependency-injection",
+  "name": "rodi",
   "description": "Ultralight solution for dependency injection.",
-  "version": "1.0.3",
+  "version": "1.0.0",
   "homepage": "https://github.com/RobertoPrevato/R.js",
   "main": "./r.js",
   "files": [

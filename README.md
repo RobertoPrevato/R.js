@@ -7,7 +7,7 @@ Ultralight solution for dependency injection, simple and framework independent.
 Either install using `npm`:
 
 ```bash
-npm install r-dependency-injection
+npm install rodi
 ```
 
 Or download one of these two files:

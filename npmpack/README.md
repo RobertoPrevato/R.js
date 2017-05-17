@@ -4,7 +4,7 @@ Ultralight solution for dependency injection, simple and framework independent.
 [Live demo](https://robertoprevato.github.io/demos/rjs/index.html)
 
 ```bash
-npm install r-dependency-injection
+npm install rodi
 ```
 
 ## Features:
