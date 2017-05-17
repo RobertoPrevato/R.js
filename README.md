@@ -3,7 +3,7 @@ Ultralight solution for dependency injection, simple and framework independent.
 
 [Live demo](https://robertoprevato.github.io/demos/rjs/index.html)
 
-Minified (1.6 KB).
+Minified it occupies only 1.6 KB.
 
 ## How to use
 Either install using `npm`:
