@@ -2,7 +2,7 @@
  * R.js, ultralight solution to dependencies management.
  * https://github.com/RobertoPrevato/R.js
  *
- * Copyright 2015, Roberto Prevato
+ * Copyright 2017, Roberto Prevato
  * https://robertoprevato.github.io
  *
  * Licensed under the MIT license:
