@@ -3,8 +3,6 @@ Ultralight solution for dependency injection, simple and framework independent.
 
 [Live demo](https://robertoprevato.github.io/demos/rjs/index.html)
 
-Minified it occupies only 1.6 KB.
-
 ## How to use
 Either install using `npm`:
 
@@ -22,6 +20,7 @@ Or download one of these two files:
 - Allows to define modules that work seamlessly within [NodeJs](https://nodejs.org/) and inside the browsers
 - Supports asynchronous module definition
 - Keeps synchronous what can stay synchronous
+- Minified it occupies only 1.6 KB
 
 **Recommended**: see the [live demo](https://robertoprevato.github.io/demos/rjs/index.html), click on the yellow button and observe in browser console, to see an example of lazily loaded application area. 
 
